@@ -1,1 +1,0 @@
-Upload media/social-preview.png in Settings > Social preview.
