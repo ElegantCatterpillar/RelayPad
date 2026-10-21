@@ -77,7 +77,12 @@ Bluetooth. If something fails, the Activity log in the app (and the log files un
 
 RelayPad is **freeware** (not open source): free for personal, non-commercial use.
 You may not sell it, modify it, or redistribute builds without permission. See
-[LICENSE](LICENSE) for the full terms. Third-party libraries keep their own licenses.
+[LICENSE](LICENSE) for the full terms.
+
+Rust dependency license texts: [THIRD_PARTY_LICENSES](THIRD_PARTY_LICENSES).
+ViGEmBus and HidHide (optional, from Drivers) keep their own licenses. Protocol
+research used as reference only (reimplemented): ndeadly/switch2_controller_research,
+SDL (`SDL_hidapi_switch2.c`), switch2controllerpc.
 
 ## Website
 
