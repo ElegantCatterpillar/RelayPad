@@ -7,7 +7,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="media/lockup-dark-lg.png" />
-    <img src="media/lockup-light-lg.png" alt="RelayPad" height="40" />
+    <img src="media/lockup-light-lg.png" alt="RelayPad" height="36" />
   </picture>
 </p>
 
