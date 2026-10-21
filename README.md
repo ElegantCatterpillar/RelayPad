@@ -73,6 +73,12 @@ on this repository. Say which controller, Windows version, and whether you used 
 Bluetooth. If something fails, the Activity log in the app (and the log files under
 `%LOCALAPPDATA%\dev.relaypad.tray\logs\`) help a lot.
 
+## License
+
+RelayPad is **freeware** (not open source): free for personal, non-commercial use.
+You may not sell it, modify it, or redistribute builds without permission. See
+[LICENSE](LICENSE) for the full terms. Third-party libraries keep their own licenses.
+
 ## Website
 
 A dedicated product page is planned. This README will feed that page so the story stays

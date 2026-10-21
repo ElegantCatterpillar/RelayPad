@@ -1,0 +1,26 @@
+RelayPad Freeware License
+Copyright (c) 2026 RelayPad contributors
+
+RelayPad is freeware. It is not open-source software.
+
+Permission is granted to download, install, and use RelayPad on your own Windows
+computers for personal, non-commercial purposes, free of charge.
+
+You may not, without prior written permission from the copyright holders:
+
+  - sell, rent, lease, or otherwise commercially exploit RelayPad;
+  - charge others for copies, access, or support that redistributes RelayPad;
+  - modify RelayPad or create derivative works based on it;
+  - redistribute RelayPad (including modified or rebranded builds), except to
+    share an official installer link to the public RelayPad releases repository.
+
+Third-party components bundled or installed with RelayPad (for example ViGEmBus,
+Tauri, and other libraries listed in the app) remain under their own licenses.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
