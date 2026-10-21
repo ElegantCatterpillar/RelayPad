@@ -1,5 +1,13 @@
 # RelayPad
 
+<p align="center">
+  <img src="media/app-icon.png" alt="RelayPad icon" width="128" height="128" />
+</p>
+
+<p align="center">
+  <img src="media/lockup-light.png" alt="RelayPad" height="28" />
+</p>
+
 RelayPad is a Windows tray app that turns Nintendo controllers into a virtual Xbox 360
 or DualShock 4 gamepad, so PC games see a normal controller.
 
@@ -8,6 +16,10 @@ source code lives in a separate private repository. A product website is planned
 then, this README is the place to learn what RelayPad does and how to install it.
 
 **Not affiliated with Nintendo, Microsoft, or Sony.** All trademarks belong to their owners.
+
+<p align="center">
+  <img src="media/switch2-pro-front.svg" alt="Nintendo Switch 2 Pro Controller (status art)" width="420" />
+</p>
 
 ## What it does
 
