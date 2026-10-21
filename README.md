@@ -6,8 +6,8 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="media/lockup-dark.svg" />
-    <img src="media/lockup-light.svg" alt="RelayPad" height="32" />
+    <source media="(prefers-color-scheme: dark)" srcset="media/lockup-dark-lg.png" />
+    <img src="media/lockup-light-lg.png" alt="RelayPad" height="40" />
   </picture>
 </p>
 
@@ -21,7 +21,7 @@ then, this README is the place to learn what RelayPad does and how to install it
 **Not affiliated with Nintendo, Microsoft, or Sony.** All trademarks belong to their owners.
 
 <p align="center">
-  <img src="media/switch2-pro-front.svg" alt="Nintendo Switch 2 Pro Controller (status art)" width="480" />
+  <img src="media/switch2-pro-front.png" alt="Nintendo Switch 2 Pro Controller (status art)" width="480" />
 </p>
 
 ## What it does
