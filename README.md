@@ -40,7 +40,7 @@ WebView2 is used by the desktop shell (usually already on Windows 11).
 
 ## Install
 
-1. Open the latest [Release](https://github.com/ElegantCatterpillar/relaypad-releases/releases/latest).
+1. Open the latest [Release](https://github.com/ElegantCatterpillar/RelayPad/releases/latest).
 2. Download the Windows installer (NSIS `.exe`) and run it.
 3. Start **RelayPad** from the Start menu (it also lives in the system tray).
 4. Open **Settings → Drivers** and install **ViGEmBus** if the app asks for it.
@@ -58,7 +58,7 @@ Builds published here are signed for the in-app updater.
 - With **Install updates automatically** on (default), RelayPad checks every few hours
   and installs when no controller is in use.
 - With it off, About → **Check for updates** only notifies you.
-- You can always download a newer installer from [Releases](https://github.com/ElegantCatterpillar/relaypad-releases/releases).
+- You can always download a newer installer from [Releases](https://github.com/ElegantCatterpillar/RelayPad/releases).
 
 ## Privacy
 
@@ -68,7 +68,7 @@ them. Nothing is uploaded without that consent.
 
 ## Feedback
 
-For early friend builds, open an [issue](https://github.com/ElegantCatterpillar/relaypad-releases/issues)
+For early friend builds, open an [issue](https://github.com/ElegantCatterpillar/RelayPad/issues)
 on this repository. Say which controller, Windows version, and whether you used USB or
 Bluetooth. If something fails, the Activity log in the app (and the log files under
 `%LOCALAPPDATA%\dev.relaypad.tray\logs\`) help a lot.
