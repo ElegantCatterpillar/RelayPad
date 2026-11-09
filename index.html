@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RelayPad · Your Switch controller on PC</title>
+  <meta name="description" content="RelayPad is a free Windows app that makes the Switch 2 Pro Controller, Joy-Con 2 and Switch Pro Controller work in every PC game, with motion, HD rumble, battery and NFC." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" type="image/png" href="media/app-icon.png" />
+  <link rel="apple-touch-icon" href="media/app-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="RelayPad · Your Switch controller on PC" />
+  <meta property="og:description" content="Free Windows app. Switch 2 Pro Controller, Joy-Con 2 and Switch Pro Controller, ready for every PC game." />
+  <meta property="og:image" content="https://elegantcatterpillar.github.io/RelayPad/media/social-preview.png" />
+  <meta property="og:url" content="https://elegantcatterpillar.github.io/RelayPad/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RelayPad",
+    "operatingSystem": "Windows 10, Windows 11",
+    "applicationCategory": "GameApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "downloadUrl": "https://github.com/ElegantCatterpillar/RelayPad/releases/latest"
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #181818;
+      --surface-2: #1F1F1F;
+      --line: #313131;
+      --text: #FFFFFF;
+      --muted: #9B9B9B;
+      --accent: #4ADE9A;
+      --accent-strong: #059669;
+      --on-accent: #0B0D10;
+      --ease: cubic-bezier(0.32, 0.72, 0, 1);
+      --s-50: 4px; --s-75: 8px; --s-100: 12px; --s-200: 16px; --s-300: 24px;
+      --s-400: 32px; --s-500: 40px; --s-600: 48px; --s-700: 64px; --s-800: 80px; --s-900: 96px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Geist", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { margin: 0; font-weight: 600; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    a { color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+    .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 var(--s-300); }
+    .muted { color: var(--muted); }
+    .skip {
+      position: absolute; left: var(--s-200); top: -64px; z-index: 100;
+      background: var(--accent); color: var(--on-accent); padding: var(--s-75) var(--s-100);
+      border-radius: 8px; font-weight: 600; text-decoration: none;
+      transition: top 300ms var(--ease);
+    }
+    .skip:focus { top: var(--s-200); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--s-75);
+      padding: var(--s-75) var(--s-100); border-radius: 12px; border: 1px solid transparent;
+      font: inherit; font-size: 16px; line-height: 24px; font-weight: 600;
+      text-decoration: none; cursor: pointer;
+      transition: transform 700ms var(--ease), background-color 700ms var(--ease), border-color 700ms var(--ease);
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--accent); color: var(--on-accent); }
+    .btn-primary:hover { background: #6BE8AE; transform: translateY(-2px); }
+    .btn-lg { padding: var(--s-100) var(--s-300); font-size: 18px; line-height: 28px; border-radius: 16px; }
+    .btn-ghost { background: transparent; border-color: var(--line); color: var(--text); }
+    .btn-ghost:hover { background: var(--surface-2); }
+    .btn-sm { font-size: 14px; line-height: 20px; border-radius: 9999px; padding: var(--s-75) var(--s-200); }
+    .btn i { font-size: 20px; }
+
+    /* Floating island nav */
+    .nav {
+      position: fixed; top: var(--s-300); left: 50%; transform: translateX(-50%); z-index: 50;
+      display: flex; align-items: center; gap: var(--s-300);
+      width: max-content; max-width: calc(100% - var(--s-400));
+      padding: var(--s-75) var(--s-75) var(--s-75) var(--s-200);
+      border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(24, 24, 24, 0.72); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    }
+    .brand { display: flex; align-items: center; gap: var(--s-75); font-weight: 600; text-decoration: none; }
+    .brand img { width: 28px; height: 28px; border-radius: 8px; }
+    .nav-links { display: flex; gap: var(--s-50); }
+    .nav-links a {
+      font-size: 14px; line-height: 20px; color: var(--muted); text-decoration: none;
+      padding: var(--s-75) var(--s-100); border-radius: 9999px;
+      transition: color 700ms var(--ease), background-color 700ms var(--ease);
+    }
+    .nav-links a:hover, .nav-links a[aria-current="true"] { color: var(--text); background: var(--surface-2); }
+    .nav-actions { display: flex; align-items: center; gap: var(--s-75); }
+    .lang {
+      font: inherit; font-size: 14px; line-height: 20px; font-weight: 600; color: var(--muted);
+      background: transparent; border: 1px solid var(--line); border-radius: 9999px;
+      padding: var(--s-75) var(--s-100); cursor: pointer;
+      transition: color 700ms var(--ease), border-color 700ms var(--ease);
+    }
+    .lang:hover { color: var(--text); border-color: var(--muted); }
+    .burger {
+      display: none; position: relative; width: 40px; height: 40px; border: 0; border-radius: 9999px;
+      background: var(--surface-2); cursor: pointer;
+    }
+    .burger span {
+      position: absolute; left: 12px; width: 16px; height: 2px; background: var(--text); border-radius: 2px;
+      transition: transform 700ms var(--ease);
+    }
+    .burger span:first-child { top: 15px; }
+    .burger span:last-child { top: 23px; }
+    .menu-open .burger span:first-child { transform: translateY(4px) rotate(45deg); }
+    .menu-open .burger span:last-child { transform: translateY(-4px) rotate(-45deg); }
+    .overlay {
+      position: fixed; inset: 0; z-index: 40; display: flex; flex-direction: column; justify-content: center;
+      gap: var(--s-200); padding: var(--s-400);
+      background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(64px); -webkit-backdrop-filter: blur(64px);
+      opacity: 0; pointer-events: none; transition: opacity 700ms var(--ease);
+    }
+    .overlay a {
+      font-size: 30px; line-height: 36px; font-weight: 600; text-decoration: none;
+      transform: translateY(48px); opacity: 0;
+      transition: transform 700ms var(--ease), opacity 700ms var(--ease);
+    }
+    .menu-open .overlay { opacity: 1; pointer-events: auto; }
+    .menu-open .overlay a { transform: translateY(0); opacity: 1; }
+    .menu-open .overlay a:nth-child(2) { transition-delay: 100ms; }
+    .menu-open .overlay a:nth-child(3) { transition-delay: 150ms; }
+    .menu-open .overlay a:nth-child(4) { transition-delay: 200ms; }
+    .menu-open .overlay a:nth-child(5) { transition-delay: 250ms; }
+    @media (max-width: 860px) {
+      .nav-links, .nav-actions .btn-sm { display: none; }
+      .burger { display: block; }
+    }
+
+    /* Sections */
+    section { padding: var(--s-900) 0; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: var(--s-75);
+      font-size: 14px; line-height: 20px; font-weight: 500; color: var(--accent);
+      padding: var(--s-50) var(--s-100); border: 1px solid rgba(74, 222, 154, 0.3); border-radius: 9999px;
+    }
+    .h2 { font-size: 36px; line-height: 40px; max-width: 680px; }
+    .lead { font-size: 18px; line-height: 28px; color: var(--muted); max-width: 680px; margin-top: var(--s-200); }
+    .head { margin-bottom: var(--s-700); }
+
+    /* Hero */
+    .hero { padding-top: 160px; text-align: center; }
+    .hero .wrap { display: flex; flex-direction: column; align-items: center; }
+    .hero h1 {
+      margin-top: var(--s-300); max-width: 680px; font-size: 60px; line-height: 1;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #FFFFFF, #9B9B9B); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero .lead { margin-left: auto; margin-right: auto; margin-top: var(--s-300); }
+    .cta { display: flex; flex-direction: column; align-items: center; gap: var(--s-100); margin-top: var(--s-500); }
+    .cta-note { font-size: 14px; line-height: 20px; color: var(--muted); }
+    .proof { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-75); margin-top: var(--s-500); }
+    .chip {
+      display: inline-flex; align-items: center; gap: var(--s-75);
+      font-size: 14px; line-height: 20px; color: var(--muted);
+      padding: var(--s-75) var(--s-100); background: var(--surface); border: 1px solid var(--line); border-radius: 9999px;
+    }
+    .chip i { color: var(--accent); font-size: 16px; }
+    .hero-art { margin-top: var(--s-700); width: 100%; max-width: 640px; border-radius: 24px; border: 1px solid var(--line); }
+    @media (max-width: 640px) {
+      .hero { padding-top: 128px; }
+      .hero h1 { font-size: 36px; line-height: 40px; }
+      .h2 { font-size: 30px; line-height: 36px; }
+      section { padding: var(--s-700) 0; }
+    }
+
+    /* Problem */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-600); align-items: center; }
+    .compare { display: grid; gap: var(--s-200); }
+    .compare-row {
+      display: flex; align-items: center; gap: var(--s-200);
+      padding: var(--s-300); border-radius: 16px; background: var(--surface); border: 1px solid var(--line);
+    }
+    .compare-row i { font-size: 32px; flex: none; }
+    .compare-row.bad i { color: #F87171; }
+    .compare-row.good { border-color: rgba(74, 222, 154, 0.4); }
+    .compare-row.good i { color: var(--accent); }
+    .compare-row strong { display: block; font-weight: 600; }
+    .compare-row span { font-size: 14px; line-height: 20px; color: var(--muted); }
+    @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+
+    /* Benefits */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-200); }
+    .card {
+      padding: var(--s-400); border-radius: 24px; background: var(--surface); border: 1px solid var(--line);
+      transition: transform 700ms var(--ease), border-color 700ms var(--ease);
+    }
+    .card:hover { transform: translateY(-4px); border-color: #4A4A4A; }
+    .icon {
+      display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(74, 222, 154, 0.12); color: var(--accent); font-size: 24px; margin-bottom: var(--s-300);
+    }
+    .card h3 { font-size: 20px; line-height: 28px; }
+    .card p { margin-top: var(--s-75); color: var(--muted); }
+    @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+    /* Tagline reveal */
+    .tagline { padding: 160px 0; }
+    .tagline p { font-size: 48px; line-height: 1.1; font-weight: 600; max-width: 820px; text-wrap: balance; }
+    .tagline .w { color: rgba(255, 255, 255, 0.3); transition: color 900ms var(--ease); }
+    .tagline .w.on { color: var(--text); }
+    @media (max-width: 640px) { .tagline { padding: var(--s-900) 0; } .tagline p { font-size: 30px; line-height: 36px; } }
+
+    /* Steps */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-200); counter-reset: step; }
+    .step { padding: var(--s-400); border-radius: 24px; background: var(--surface); border: 1px solid var(--line); }
+    .step-n {
+      display: grid; place-items: center; width: 40px; height: 40px; border-radius: 9999px;
+      background: var(--accent); color: var(--on-accent); font-weight: 700; margin-bottom: var(--s-300);
+    }
+    .step h3 { font-size: 20px; line-height: 28px; }
+    .step p { margin-top: var(--s-75); color: var(--muted); }
+    .needs { margin-top: var(--s-400); font-size: 14px; line-height: 20px; color: var(--muted); }
+    @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+
+    /* Controllers */
+    .pads { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-200); }
+    .pad { padding: var(--s-400); border-radius: 24px; background: var(--surface); border: 1px solid var(--line); }
+    .pad-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-200); }
+    .pad h3 { font-size: 20px; line-height: 28px; }
+    .pad .sub { font-size: 14px; line-height: 20px; color: var(--muted); margin-top: var(--s-50); }
+    .badge {
+      flex: none; font-size: 12px; line-height: 16px; font-weight: 600; padding: var(--s-50) var(--s-100);
+      border-radius: 9999px; background: rgba(74, 222, 154, 0.12); color: var(--accent); border: 1px solid rgba(74, 222, 154, 0.3);
+    }
+    .badge.test { background: rgba(250, 204, 21, 0.1); color: #FACC15; border-color: rgba(250, 204, 21, 0.3); }
+    .badge.soon { background: var(--surface-2); color: var(--muted); border-color: var(--line); }
+    .feats { display: flex; flex-wrap: wrap; gap: var(--s-75); margin-top: var(--s-300); padding: 0; list-style: none; }
+    .feats li {
+      display: inline-flex; align-items: center; gap: var(--s-50);
+      font-size: 14px; line-height: 20px; padding: var(--s-50) var(--s-100);
+      border-radius: 8px; background: var(--surface-2);
+    }
+    .feats i { color: var(--accent); }
+    .feats li.t i { color: #FACC15; }
+    .pad.soon { background: transparent; border-style: dashed; }
+    @media (max-width: 860px) { .pads { grid-template-columns: 1fr; } }
+
+    /* FAQ */
+    .faq { max-width: 760px; }
+    details { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); margin-bottom: var(--s-100); }
+    summary {
+      list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: var(--s-200);
+      padding: var(--s-300); font-size: 18px; line-height: 28px; font-weight: 600; border-radius: 16px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary i { color: var(--muted); transition: transform 700ms var(--ease); flex: none; }
+    details[open] summary i { transform: rotate(45deg); }
+    details p { padding: 0 var(--s-300) var(--s-300); color: var(--muted); }
+
+    /* Final CTA */
+    .final { text-align: center; }
+    .final-box {
+      padding: var(--s-800) var(--s-300); border-radius: 32px; background: var(--surface); border: 1px solid var(--line);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .final-box img { width: 72px; height: 72px; border-radius: 16px; margin-bottom: var(--s-300); }
+    .final .lead { margin-left: auto; margin-right: auto; }
+
+    footer { padding: var(--s-600) 0 var(--s-700); border-top: 1px solid var(--surface-2); }
+    .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-300); }
+    .foot-links { display: flex; flex-wrap: wrap; gap: var(--s-300); }
+    .foot-links a { font-size: 14px; line-height: 20px; color: var(--muted); text-decoration: none; transition: color 700ms var(--ease); }
+    .foot-links a:hover { color: var(--text); }
+    .legal { margin-top: var(--s-300); font-size: 12px; line-height: 16px; color: #6B6B6B; max-width: 760px; }
+
+    /* Scroll reveal, only when JS runs */
+    .js .reveal {
+      opacity: 0; transform: translateY(64px); filter: blur(12px);
+      transition: opacity 900ms var(--ease), transform 900ms var(--ease), filter 900ms var(--ease);
+    }
+    .js .reveal.in { opacity: 1; transform: none; filter: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 1ms !important; transition-delay: 0ms !important; }
+      .js .reveal { opacity: 1; transform: none; filter: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <script>document.documentElement.classList.add("js");</script>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+  <header>
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="#top"><img src="media/app-icon.png" alt="" width="28" height="28" />RelayPad</a>
+      <div class="nav-links">
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#how" data-i18n="nav.how">How it works</a>
+        <a href="#controllers" data-i18n="nav.controllers">Controllers</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang" type="button" data-lang-toggle aria-label="Cambiar a español">ES</button>
+        <a class="btn btn-primary btn-sm" data-download href="https://github.com/ElegantCatterpillar/RelayPad/releases/latest" data-i18n="nav.download">Download</a>
+        <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="overlay"><span></span><span></span></button>
+      </div>
+    </nav>
+    <div class="overlay" id="overlay">
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#controllers" data-i18n="nav.controllers">Controllers</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="https://github.com/ElegantCatterpillar/RelayPad/releases/latest" data-download data-i18n="nav.download">Download</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap">
+        <span class="eyebrow reveal"><i class="ph ph-windows-logo" aria-hidden="true"></i><span data-i18n="hero.eyebrow">Free for Windows 10 and 11</span></span>
+        <h1 class="reveal" data-i18n-html="hero.title">Your Switch controller,<br />ready for every PC game.</h1>
+        <p class="lead reveal" data-i18n="hero.lead">RelayPad connects your Switch 2 Pro Controller, Joy-Con 2 or Switch Pro Controller and shows it to your games as an Xbox or PlayStation controller. No setup per game. Motion, HD rumble and battery included.</p>
+        <div class="cta reveal">
+          <a class="btn btn-primary btn-lg" data-download href="https://github.com/ElegantCatterpillar/RelayPad/releases/latest">
+            <i class="ph-bold ph-download-simple" aria-hidden="true"></i><span data-i18n="cta.download">Download for Windows</span>
+          </a>
+          <span class="cta-note"><span data-version></span><span data-i18n="cta.note">Free · No account · Updates itself</span></span>
+        </div>
+        <div class="proof reveal" aria-label="Works with">
+          <span class="chip"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Switch 2 Pro Controller</span>
+          <span class="chip"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Joy-Con 2</span>
+          <span class="chip"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Switch Pro Controller</span>
+        </div>
+        <img class="hero-art reveal" src="media/switch2-pro-front.png" alt="Nintendo Switch 2 Pro Controller" width="800" height="520" />
+      </div>
+    </section>
+
+    <section id="problem">
+      <div class="wrap split">
+        <div class="reveal">
+          <h2 class="h2" data-i18n="problem.title">PC games expect an Xbox controller. Yours speaks Switch.</h2>
+          <p class="lead" data-i18n="problem.lead">Connect a Switch controller to Windows and most games ignore it, or put every button in the wrong place. RelayPad sits in the middle: you hold the controller you love, your games see one they already understand.</p>
+        </div>
+        <div class="compare reveal">
+          <div class="compare-row bad">
+            <i class="ph ph-prohibit" aria-hidden="true"></i>
+            <div><strong data-i18n="problem.before">Without RelayPad</strong><span data-i18n="problem.beforeDetail">No input, wrong buttons, no rumble, no gyro.</span></div>
+          </div>
+          <div class="compare-row good">
+            <i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+            <div><strong data-i18n="problem.after">With RelayPad</strong><span data-i18n="problem.afterDetail">A standard Xbox 360 or DualShock 4 controller that every game supports.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="head reveal">
+          <h2 class="h2" data-i18n="features.title">Everything your controller can do, on PC.</h2>
+          <p class="lead" data-i18n="features.lead">Not just buttons and sticks. RelayPad brings over the features that make Switch controllers great.</p>
+        </div>
+        <div class="grid">
+          <article class="card reveal">
+            <div class="icon"><i class="ph ph-game-controller" aria-hidden="true"></i></div>
+            <h3 data-i18n="f1.title">Every button, every feature</h3>
+            <p data-i18n="f1.text">Sticks, triggers, the GL, GR and C buttons of the Switch 2, motion, HD rumble, player lights and battery.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon"><i class="ph ph-arrows-left-right" aria-hidden="true"></i></div>
+            <h3 data-i18n="f2.title">Wireless or wired, mid game</h3>
+            <p data-i18n="f2.text">Plug in the cable while you play and keep going. The game never loses your controller.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon"><i class="ph ph-users-three" aria-hidden="true"></i></div>
+            <h3 data-i18n="f3.title">Play together</h3>
+            <p data-i18n="f3.text">Up to eight controllers at once, each one on its own player, remembered between sessions.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon"><i class="ph ph-sliders-horizontal" aria-hidden="true"></i></div>
+            <h3 data-i18n="f4.title">Make it yours</h3>
+            <p data-i18n="f4.text">Named profiles with remapping, turbo, macros, stick deadzones and curves, gyro aim, and rumble you can try before you save.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon"><i class="ph ph-contactless-payment" aria-hidden="true"></i></div>
+            <h3 data-i18n="f5.title">NFC and amiibo</h3>
+            <p data-i18n="f5.text">On the Switch Pro Controller, read amiibo and tags with the character's name, and write onto blank tags.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon"><i class="ph ph-arrows-clockwise" aria-hidden="true"></i></div>
+            <h3 data-i18n="f6.title">Always up to date</h3>
+            <p data-i18n="f6.text">New versions install themselves when no controller is in use. Battery and status live in your tray.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="tagline" aria-label="RelayPad">
+      <div class="wrap">
+        <p data-tagline data-i18n="tagline">You already own the best controller. Now every PC game knows it too.</p>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <div class="head reveal">
+          <h2 class="h2" data-i18n="how.title">Playing in three steps.</h2>
+          <p class="lead" data-i18n="how.lead">No accounts, no command lines, no editing files.</p>
+        </div>
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step-n">1</div>
+            <h3 data-i18n="s1.title">Download and install</h3>
+            <p data-i18n="s1.text">Get the installer from the latest release and run it. RelayPad lives in your tray.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step-n">2</div>
+            <h3 data-i18n="s2.title">Add the driver</h3>
+            <p data-i18n="s2.text">RelayPad installs ViGEmBus, the driver behind the virtual controller, in one click from Settings.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step-n">3</div>
+            <h3 data-i18n="s3.title">Connect and play</h3>
+            <p data-i18n="s3.text">Plug in the cable or pair over Bluetooth. The app shows the exact steps for your model.</p>
+          </div>
+        </div>
+        <p class="needs reveal"><span data-i18n="how.needs">You need Windows 10 or 11 (x64) and a Bluetooth adapter or a USB cable.</span></p>
+      </div>
+    </section>
+
+    <section id="controllers">
+      <div class="wrap">
+        <div class="head reveal">
+          <h2 class="h2" data-i18n="pads.title">Built for the Switch family.</h2>
+          <p class="lead" data-i18n="pads.lead">Each controller gets its own support, tested on real hardware.</p>
+        </div>
+        <div class="pads">
+          <article class="pad reveal">
+            <div class="pad-head">
+              <div><h3>Switch 2 Pro Controller</h3><p class="sub">Bluetooth · USB</p></div>
+              <span class="badge" data-i18n="badge.ready">Ready</span>
+            </div>
+            <ul class="feats">
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.buttons">All buttons, incl. GL, GR, C</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.motion">Motion</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.hd">HD rumble</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.leds">Player lights</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.battery">Battery</span></li>
+            </ul>
+          </article>
+          <article class="pad reveal">
+            <div class="pad-head">
+              <div><h3>Switch Pro Controller</h3><p class="sub">Bluetooth · USB · Switch 1</p></div>
+              <span class="badge" data-i18n="badge.ready">Ready</span>
+            </div>
+            <ul class="feats">
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.motion">Motion</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.hd">HD rumble</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.leds">Player lights</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.battery">Battery</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.nfcRead">NFC and amiibo reading</span></li>
+              <li class="t"><i class="ph-bold ph-flask" aria-hidden="true"></i><span data-i18n="feat.nfcWrite">NFC writing (testing)</span></li>
+            </ul>
+          </article>
+          <article class="pad reveal">
+            <div class="pad-head">
+              <div><h3 data-i18n="pad.jc2">Joy-Con 2, left or right</h3><p class="sub">Bluetooth</p></div>
+              <span class="badge" data-i18n="badge.ready">Ready</span>
+            </div>
+            <ul class="feats">
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.sideways">Held sideways</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.motion">Motion</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.rumble">Rumble</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.leds">Player lights</span></li>
+              <li><i class="ph-bold ph-check" aria-hidden="true"></i><span data-i18n="feat.battery">Battery</span></li>
+            </ul>
+          </article>
+          <article class="pad reveal">
+            <div class="pad-head">
+              <div><h3 data-i18n="pad.jc2pair">Joy-Con 2 pair</h3><p class="sub">Bluetooth</p></div>
+              <span class="badge test" data-i18n="badge.testing">Testing</span>
+            </div>
+            <ul class="feats">
+              <li class="t"><i class="ph-bold ph-flask" aria-hidden="true"></i><span data-i18n="feat.pair">Left and right as one controller</span></li>
+              <li class="t"><i class="ph-bold ph-flask" aria-hidden="true"></i><span data-i18n="feat.remembered">Remembered between sessions</span></li>
+            </ul>
+          </article>
+          <article class="pad soon reveal">
+            <div class="pad-head">
+              <div><h3 data-i18n="pad.jc1">Joy-Con and NES Joy-Con</h3><p class="sub">Switch 1</p></div>
+              <span class="badge soon" data-i18n="badge.next">Next up</span>
+            </div>
+          </article>
+          <article class="pad soon reveal">
+            <div class="pad-head">
+              <div><h3 data-i18n="pad.nso">GameCube, SNES, N64 and Genesis</h3><p class="sub">Nintendo Switch Online</p></div>
+              <span class="badge soon" data-i18n="badge.later">On the roadmap</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="head reveal">
+          <h2 class="h2" data-i18n="faq.title">Questions before you download.</h2>
+        </div>
+        <div class="faq reveal">
+          <details>
+            <summary><span data-i18n="q1">Is RelayPad really free?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="a1">Yes. It is free for personal use, with no ads, no account and no trial period.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="q2">Windows warns about the installer. Is it safe?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="a2">RelayPad is new and its installer is not code signed yet, so Windows SmartScreen may say "unknown publisher". Choose More info, then Run anyway. Updates are signed, and the app checks that signature before installing one.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="q3">Which games work?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="a3">Any game that supports an Xbox 360 or DualShock 4 controller, which covers almost every PC game with gamepad support, on Steam or anywhere else.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="q4">Will games see two controllers?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="a4">They can. Install the optional HidHide driver from Settings, Drivers, and games only see the RelayPad controller. On Switch 2 controllers this is still being tested.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="q5">Do I need Bluetooth?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="a5">Not always. The Switch 2 Pro Controller and the Switch Pro Controller work over a USB cable. Joy-Con 2 have no USB port, so they need a Bluetooth adapter.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="q6">Can I use several controllers at once?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="a6">Yes, up to eight, each on its own player. You can move a controller to another player or swap two of them from the app.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="q7">Does it send my data anywhere?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="a7">No. RelayPad can keep a diagnostic report on your PC if you allow it on first run. Nothing is uploaded.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="q8">How do I uninstall it?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="a8">From Settings, Apps, Installed apps in Windows. Drivers you added from RelayPad are removed from its own Drivers page.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final" id="download">
+      <div class="wrap">
+        <div class="final-box reveal">
+          <img src="media/app-icon.png" alt="" width="72" height="72" />
+          <h2 class="h2" data-i18n="final.title">Your controller is ready. Is your PC?</h2>
+          <p class="lead" data-i18n="final.lead">Free for Windows 10 and 11. No account, no ads, no trial.</p>
+          <div class="cta">
+            <a class="btn btn-primary btn-lg" data-download href="https://github.com/ElegantCatterpillar/RelayPad/releases/latest">
+              <i class="ph-bold ph-download-simple" aria-hidden="true"></i><span data-i18n="cta.download">Download for Windows</span>
+            </a>
+            <span class="cta-note"><span data-version></span><span data-i18n="cta.note">Free · No account · Updates itself</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <a class="brand" href="#top"><img src="media/app-icon.png" alt="" width="28" height="28" />RelayPad</a>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="https://github.com/ElegantCatterpillar/RelayPad/releases" data-i18n="foot.releases">All releases</a>
+          <a href="https://github.com/ElegantCatterpillar/RelayPad/blob/main/CHANGELOG.md" data-i18n="foot.changelog">What's new</a>
+          <a href="https://github.com/ElegantCatterpillar/RelayPad/blob/main/ROADMAP.md" data-i18n="foot.roadmap">Roadmap</a>
+          <a href="https://github.com/ElegantCatterpillar/RelayPad/issues" data-i18n="foot.help">Help and ideas</a>
+          <a href="https://github.com/ElegantCatterpillar/RelayPad/blob/main/LICENSE" data-i18n="foot.license">License</a>
+          <a href="#faq" data-i18n="foot.privacy">Privacy</a>
+        </nav>
+      </div>
+      <p class="legal" data-i18n="foot.legal">RelayPad is an independent project, not affiliated with, endorsed by or sponsored by Nintendo, Microsoft or Sony. Nintendo Switch, Joy-Con and amiibo are trademarks of Nintendo. Xbox is a trademark of Microsoft. DualShock and PlayStation are trademarks of Sony Interactive Entertainment.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var REPO = "ElegantCatterpillar/RelayPad";
+      var es = {
+        "skip": "Saltar al contenido",
+        "nav.features": "Funciones",
+        "nav.how": "Cómo funciona",
+        "nav.controllers": "Controles",
+        "nav.faq": "Preguntas",
+        "nav.download": "Descargar",
+        "hero.eyebrow": "Gratis para Windows 10 y 11",
+        "hero.title": "Tu control de Switch,<br />listo para cualquier juego de PC.",
+        "hero.lead": "RelayPad conecta tu Control Pro de Switch 2, tus Joy-Con 2 o tu Control Pro de Switch y se lo presenta a tus juegos como un control de Xbox o PlayStation. Sin configurar cada juego. Con movimiento, vibración HD y batería.",
+        "cta.download": "Descargar para Windows",
+        "cta.note": "Gratis · Sin cuenta · Se actualiza solo",
+        "problem.title": "Los juegos de PC esperan un control de Xbox. El tuyo habla Switch.",
+        "problem.lead": "Conecta un control de Switch a Windows y la mayoría de los juegos lo ignora, o pone cada botón en el lugar equivocado. RelayPad se pone en medio: tú usas el control que te gusta y tus juegos ven uno que ya entienden.",
+        "problem.before": "Sin RelayPad",
+        "problem.beforeDetail": "Sin respuesta, botones cambiados, sin vibración, sin giroscopio.",
+        "problem.after": "Con RelayPad",
+        "problem.afterDetail": "Un control estándar de Xbox 360 o DualShock 4 que todos los juegos reconocen.",
+        "features.title": "Todo lo que tu control sabe hacer, en PC.",
+        "features.lead": "No solo botones y sticks. RelayPad trae las funciones que hacen grandes a los controles de Switch.",
+        "f1.title": "Todos los botones, todas las funciones",
+        "f1.text": "Sticks, gatillos, los botones GL, GR y C de Switch 2, movimiento, vibración HD, luces de jugador y batería.",
+        "f2.title": "Inalámbrico o con cable, a media partida",
+        "f2.text": "Conecta el cable mientras juegas y sigue. El juego nunca pierde tu control.",
+        "f3.title": "Juega en compañía",
+        "f3.text": "Hasta ocho controles a la vez, cada uno con su jugador, recordado entre sesiones.",
+        "f4.title": "Hazlo tuyo",
+        "f4.text": "Perfiles con nombre con reasignación de botones, turbo, macros, zonas muertas y curvas de los sticks, apuntado con giroscopio y una vibración que pruebas antes de guardar.",
+        "f5.title": "NFC y amiibo",
+        "f5.text": "En el Control Pro de Switch, lee amiibo y etiquetas con el nombre del personaje, y escribe en etiquetas en blanco.",
+        "f6.title": "Siempre al día",
+        "f6.text": "Las versiones nuevas se instalan solas cuando ningún control está en uso. La batería y el estado viven en tu bandeja.",
+        "tagline": "Ya tienes el mejor control. Ahora todos tus juegos de PC también lo saben.",
+        "how.title": "A jugar en tres pasos.",
+        "how.lead": "Sin cuentas, sin líneas de comandos, sin editar archivos.",
+        "s1.title": "Descarga e instala",
+        "s1.text": "Baja el instalador de la versión más reciente y ejecútalo. RelayPad vive en tu bandeja.",
+        "s2.title": "Agrega el controlador",
+        "s2.text": "RelayPad instala ViGEmBus, el controlador detrás del control virtual, con un clic desde Ajustes.",
+        "s3.title": "Conecta y juega",
+        "s3.text": "Conecta el cable o empareja por Bluetooth. La app te muestra los pasos exactos para tu modelo.",
+        "how.needs": "Necesitas Windows 10 u 11 (x64) y un adaptador Bluetooth o un cable USB.",
+        "pads.title": "Hecho para la familia Switch.",
+        "pads.lead": "Cada control tiene su propio soporte, probado en hardware real.",
+        "badge.ready": "Listo",
+        "badge.testing": "En pruebas",
+        "badge.next": "Lo siguiente",
+        "badge.later": "En la hoja de ruta",
+        "feat.buttons": "Todos los botones, incl. GL, GR, C",
+        "feat.motion": "Movimiento",
+        "feat.hd": "Vibración HD",
+        "feat.rumble": "Vibración",
+        "feat.leds": "Luces de jugador",
+        "feat.battery": "Batería",
+        "feat.nfcRead": "Lectura de NFC y amiibo",
+        "feat.nfcWrite": "Escritura NFC (en pruebas)",
+        "feat.sideways": "En horizontal",
+        "feat.pair": "Izquierdo y derecho como un solo control",
+        "feat.remembered": "Se recuerda entre sesiones",
+        "pad.jc2": "Joy-Con 2, izquierdo o derecho",
+        "pad.jc2pair": "Par de Joy-Con 2",
+        "pad.jc1": "Joy-Con y Joy-Con de NES",
+        "pad.nso": "GameCube, SNES, N64 y Genesis",
+        "faq.title": "Preguntas antes de descargar.",
+        "q1": "¿RelayPad de verdad es gratis?",
+        "a1": "Sí. Es gratis para uso personal, sin anuncios, sin cuenta y sin periodo de prueba.",
+        "q2": "Windows me advierte sobre el instalador. ¿Es seguro?",
+        "a2": "RelayPad es nuevo y su instalador todavía no tiene firma de código, así que Windows SmartScreen puede decir \"editor desconocido\". Elige Más información y luego Ejecutar de todas formas. Las actualizaciones sí van firmadas, y la app revisa esa firma antes de instalar una.",
+        "q3": "¿Qué juegos funcionan?",
+        "a3": "Cualquier juego compatible con un control de Xbox 360 o DualShock 4, que son casi todos los juegos de PC con soporte para control, en Steam o donde sea.",
+        "q4": "¿Los juegos verán dos controles?",
+        "a4": "Puede pasar. Instala el controlador opcional HidHide desde Ajustes, Controladores, y los juegos solo verán el control de RelayPad. En los controles de Switch 2 todavía está en pruebas.",
+        "q5": "¿Necesito Bluetooth?",
+        "a5": "No siempre. El Control Pro de Switch 2 y el Control Pro de Switch funcionan con cable USB. Los Joy-Con 2 no tienen puerto USB, así que necesitan un adaptador Bluetooth.",
+        "q6": "¿Puedo usar varios controles a la vez?",
+        "a6": "Sí, hasta ocho, cada uno con su jugador. Puedes mover un control a otro jugador o intercambiar dos desde la app.",
+        "q7": "¿Envía mis datos a algún lado?",
+        "a7": "No. RelayPad puede guardar un reporte de diagnóstico en tu PC si lo permites en el primer inicio. No se sube nada.",
+        "q8": "¿Cómo lo desinstalo?",
+        "a8": "Desde Configuración, Aplicaciones, Aplicaciones instaladas en Windows. Los controladores que agregaste desde RelayPad se quitan en su propia página de Controladores.",
+        "final.title": "Tu control está listo. ¿Y tu PC?",
+        "final.lead": "Gratis para Windows 10 y 11. Sin cuenta, sin anuncios, sin periodo de prueba.",
+        "foot.releases": "Todas las versiones",
+        "foot.changelog": "Novedades",
+        "foot.roadmap": "Hoja de ruta",
+        "foot.help": "Ayuda e ideas",
+        "foot.license": "Licencia",
+        "foot.privacy": "Privacidad",
+        "foot.legal": "RelayPad es un proyecto independiente, sin afiliación, respaldo ni patrocinio de Nintendo, Microsoft o Sony. Nintendo Switch, Joy-Con y amiibo son marcas de Nintendo. Xbox es una marca de Microsoft. DualShock y PlayStation son marcas de Sony Interactive Entertainment."
+      };
+      var meta = {
+        en: { title: document.title, toggle: "ES", toggleLabel: "Cambiar a español", version: "Version " },
+        es: { title: "RelayPad · Tu control de Switch en PC", toggle: "EN", toggleLabel: "Switch to English", version: "Versión " }
+      };
+
+      // English lives in the markup; remember it once so switching back needs no second copy.
+      var en = {};
+      document.querySelectorAll("[data-i18n]").forEach(function (el) { en[el.dataset.i18n] = el.textContent; });
+      document.querySelectorAll("[data-i18n-html]").forEach(function (el) { en[el.dataset.i18nHtml] = el.innerHTML; });
+
+      var lang = "en";
+      var latest = null;
+
+      function store(key, value) { try { localStorage.setItem(key, value); } catch (e) { /* private mode */ } }
+      function read(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+
+      function apply(next) {
+        lang = next;
+        var dict = next === "es" ? es : en;
+        document.documentElement.lang = next === "es" ? "es-MX" : "en";
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var t = dict[el.dataset.i18n]; if (t) el.textContent = t;
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+          var t = dict[el.dataset.i18nHtml]; if (t) el.innerHTML = t;
+        });
+        document.title = meta[next].title;
+        var toggle = document.querySelector("[data-lang-toggle]");
+        toggle.textContent = meta[next].toggle;
+        toggle.setAttribute("aria-label", meta[next].toggleLabel);
+        showVersion();
+        splitTagline();
+      }
+
+      document.querySelector("[data-lang-toggle]").addEventListener("click", function () {
+        var next = lang === "en" ? "es" : "en";
+        store("relaypad-lang", next);
+        apply(next);
+      });
+
+      // Mobile menu
+      var burger = document.querySelector(".burger");
+      function setMenu(open) {
+        document.body.classList.toggle("menu-open", open);
+        burger.setAttribute("aria-expanded", String(open));
+      }
+      burger.addEventListener("click", function () { setMenu(!document.body.classList.contains("menu-open")); });
+      document.querySelectorAll(".overlay a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+
+      // Scroll reveal
+      var reveal = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); reveal.unobserve(e.target); } });
+      }, { rootMargin: "0px 0px -10% 0px" });
+      document.querySelectorAll(".reveal").forEach(function (el) { reveal.observe(el); });
+
+      // Tagline: each word lights up as it crosses a line near the middle of the viewport.
+      var words = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { e.target.classList.toggle("on", e.isIntersecting || e.boundingClientRect.top < 0); });
+      }, { rootMargin: "0px 0px -45% 0px" });
+      function splitTagline() {
+        var p = document.querySelector("[data-tagline]");
+        words.disconnect();
+        var text = p.textContent;
+        p.textContent = "";
+        text.split(/\s+/).forEach(function (w, i, all) {
+          var span = document.createElement("span");
+          span.className = "w";
+          span.textContent = w;
+          p.appendChild(span);
+          if (i < all.length - 1) p.appendChild(document.createTextNode(" "));
+          words.observe(span);
+        });
+      }
+
+      // Current nav section
+      var links = document.querySelectorAll(".nav-links a");
+      var current = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          links.forEach(function (a) { a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + e.target.id)); });
+        });
+      }, { rootMargin: "-45% 0px -50% 0px" });
+      ["features", "how", "controllers", "faq"].forEach(function (id) { current.observe(document.getElementById(id)); });
+
+      // Point the download buttons straight at the installer of the latest release.
+      function showVersion() {
+        if (!latest) return;
+        document.querySelectorAll("[data-version]").forEach(function (el) { el.textContent = meta[lang].version + latest + " · "; });
+      }
+      fetch("https://api.github.com/repos/" + REPO + "/releases/latest")
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (rel) {
+          if (!rel) return;
+          latest = String(rel.tag_name || "").replace(/^v/, "") || null;
+          var exe = (rel.assets || []).filter(function (a) { return /setup\.exe$/i.test(a.name); })[0];
+          if (exe) document.querySelectorAll("[data-download]").forEach(function (a) { a.href = exe.browser_download_url; });
+          showVersion();
+        })
+        .catch(function () { /* buttons keep pointing at the releases page */ });
+
+      var saved = read("relaypad-lang");
+      apply(saved === "es" || saved === "en" ? saved : (navigator.language || "").toLowerCase().indexOf("es") === 0 ? "es" : "en");
+    })();
+  </script>
+</body>
+</html>
