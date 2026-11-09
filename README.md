@@ -13,7 +13,7 @@
 
 <p align="center">
   Free · Windows 10 and 11 · Bluetooth or USB · Updates itself<br />
-  <b>English</b> · <a href="es/README.md">Español (México)</a>
+  <a href="https://elegantcatterpillar.github.io/RelayPad/">Website</a> · <b>English</b> · <a href="es/README.md">Español (México)</a>
 </p>
 
 <p align="center">

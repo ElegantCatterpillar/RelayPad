@@ -35,7 +35,6 @@ Lo que ya salió: el [registro de cambios](CHANGELOG.md). Lo que funciona hoy: l
 ### Siguiente
 
 - **Una instalación más tranquila:** un instalador firmado, para que Windows deje de advertir.
-- **Sitio web de RelayPad.**
 - **Estado más claro:** ícono de bandeja por control, y consejos para la mejor conexión
   Bluetooth.
 - **Aviso de batería baja** antes de que tu control se apague a mitad de la partida.

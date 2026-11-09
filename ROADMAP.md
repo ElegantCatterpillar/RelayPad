@@ -34,7 +34,6 @@ Already out: the [changelog](CHANGELOG.md). Working today: the
 ### Next
 
 - **A smoother install:** a signed installer, so Windows stops warning about it.
-- **RelayPad website.**
 - **Clearer status:** tray icon per controller, and tips for the best Bluetooth connection.
 - **Low-battery notice** before your controller dies mid-game.
 

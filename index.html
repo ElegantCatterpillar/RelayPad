@@ -3,21 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RelayPad · Your Switch controller on PC</title>
+  <title>RelayPad · Use your Switch 2 Pro Controller and Joy-Con 2 on PC, free</title>
   <meta name="description" content="RelayPad is a free Windows app that makes the Switch 2 Pro Controller, Joy-Con 2 and Switch Pro Controller work in every PC game, with motion, HD rumble, battery and NFC." />
   <meta name="theme-color" content="#000000" />
+  <meta name="robots" content="index, follow" />
   <link rel="icon" type="image/png" href="media/app-icon.png" />
   <link rel="apple-touch-icon" href="media/app-icon.png" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="RelayPad · Your Switch controller on PC" />
+  <meta property="og:title" content="RelayPad · Use your Switch 2 Pro Controller and Joy-Con 2 on PC, free" />
   <meta property="og:description" content="Free Windows app. Switch 2 Pro Controller, Joy-Con 2 and Switch Pro Controller, ready for every PC game." />
   <meta property="og:image" content="https://elegantcatterpillar.github.io/RelayPad/media/social-preview.png" />
   <meta property="og:url" content="https://elegantcatterpillar.github.io/RelayPad/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_MX" />
+  <meta property="og:site_name" content="RelayPad" />
+  <link rel="canonical" href="https://elegantcatterpillar.github.io/RelayPad/" />
+  <link rel="alternate" hreflang="en" href="https://elegantcatterpillar.github.io/RelayPad/" />
+  <link rel="alternate" hreflang="es" href="https://elegantcatterpillar.github.io/RelayPad/es/" />
+  <link rel="alternate" hreflang="x-default" href="https://elegantcatterpillar.github.io/RelayPad/" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -26,9 +35,86 @@
     "operatingSystem": "Windows 10, Windows 11",
     "applicationCategory": "GameApplication",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "downloadUrl": "https://github.com/ElegantCatterpillar/RelayPad/releases/latest"
+    "downloadUrl": "https://github.com/ElegantCatterpillar/RelayPad/releases/latest",
+    "image": "https://elegantcatterpillar.github.io/RelayPad/media/social-preview.png",
+    "url": "https://elegantcatterpillar.github.io/RelayPad/"
   }
   </script>
+  <!-- faq-schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "inLanguage": "en",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is RelayPad really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. It is free for personal use, with no ads, no account and no trial period."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Windows warns about the installer. Is it safe?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "RelayPad is new and its installer is not code signed yet, so Windows SmartScreen may say \"unknown publisher\". Choose More info, then Run anyway. Updates are signed, and the app checks that signature before installing one."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which games work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Any game that supports an Xbox 360 or DualShock 4 controller, which covers almost every PC game with gamepad support, on Steam or anywhere else."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will games see two controllers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They can. Install the optional HidHide driver from Settings, Drivers, and games only see the RelayPad controller. On Switch 2 controllers this is still being tested."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need Bluetooth?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not always. The Switch 2 Pro Controller and the Switch Pro Controller work over a USB cable. Joy-Con 2 have no USB port, so they need a Bluetooth adapter."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use several controllers at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, up to eight, each on its own player. You can move a controller to another player or swap two of them from the app."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it send my data anywhere?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. RelayPad can keep a diagnostic report on your PC if you allow it on first run. Nothing is uploaded."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I uninstall it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "From Settings, Apps, Installed apps in Windows. Drivers you added from RelayPad are removed from its own Drivers page."
+        }
+      }
+    ]
+  }
+  </script>
+  <!-- /faq-schema -->
   <style>
     :root {
       --bg: #000000;
@@ -176,7 +262,15 @@
       padding: var(--s-75) var(--s-100); background: var(--surface); border: 1px solid var(--line); border-radius: 9999px;
     }
     .chip i { color: var(--accent); font-size: 16px; }
-    .hero-art { margin-top: var(--s-700); width: 100%; max-width: 640px; border-radius: 24px; border: 1px solid var(--line); }
+    .hero-art {
+      display: block; margin: var(--s-600) auto 0; width: 100%; max-width: 720px; aspect-ratio: 16 / 10; height: auto;
+      background: transparent; --poster-color: transparent; cursor: grab;
+    }
+    .hero-art:active { cursor: grabbing; }
+    .hero-art img { width: 100%; height: 100%; object-fit: contain; }
+    .drag { display: inline-flex; align-items: center; gap: var(--s-75); font-size: 14px; line-height: 20px; color: var(--muted); }
+    .stats { margin-top: var(--s-200); font-size: 14px; line-height: 20px; color: var(--muted); }
+    .stats strong { color: var(--text); font-weight: 600; }
     @media (max-width: 640px) {
       .hero { padding-top: 128px; }
       .hero h1 { font-size: 36px; line-height: 40px; }
@@ -303,7 +397,7 @@
   <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
   <header>
-    <nav class="nav" aria-label="Main">
+    <nav class="nav" aria-label="Main" data-i18n-aria="aria.main">
       <a class="brand" href="#top"><img src="media/app-icon.png" alt="" width="28" height="28" />RelayPad</a>
       <div class="nav-links">
         <a href="#features" data-i18n="nav.features">Features</a>
@@ -312,9 +406,9 @@
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </div>
       <div class="nav-actions">
-        <button class="lang" type="button" data-lang-toggle aria-label="Cambiar a español">ES</button>
+        <a class="lang" href="es/" hreflang="es" lang="es" data-lang-link="es" aria-label="Ver en español">ES</a>
         <a class="btn btn-primary btn-sm" data-download href="https://github.com/ElegantCatterpillar/RelayPad/releases/latest" data-i18n="nav.download">Download</a>
-        <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="overlay"><span></span><span></span></button>
+        <button class="burger" type="button" aria-label="Menu" data-i18n-aria="aria.menu" aria-expanded="false" aria-controls="overlay"><span></span><span></span></button>
       </div>
     </nav>
     <div class="overlay" id="overlay">
@@ -338,12 +432,18 @@
           </a>
           <span class="cta-note"><span data-version></span><span data-i18n="cta.note">Free · No account · Updates itself</span></span>
         </div>
-        <div class="proof reveal" aria-label="Works with">
+        <p class="stats" data-stats hidden><span data-stat="downloads" hidden><strong></strong> <span data-i18n="stats.downloads">downloads</span></span><span data-stat-sep hidden> · </span><span data-stat="stars" hidden><strong></strong> <span data-i18n="stats.stars">stars on GitHub</span></span></p>
+        <div class="proof reveal" aria-label="Works with" data-i18n-aria="aria.works">
           <span class="chip"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Switch 2 Pro Controller</span>
           <span class="chip"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Joy-Con 2</span>
           <span class="chip"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Switch Pro Controller</span>
         </div>
-        <img class="hero-art reveal" src="media/switch2-pro-front.png" alt="Nintendo Switch 2 Pro Controller" width="800" height="520" />
+        <model-viewer class="hero-art reveal" src="media/controller.glb" alt="3D model of the Nintendo Switch 2 Pro Controller" data-i18n-alt="alt.model"
+          camera-orbit="200deg 72deg auto" auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" camera-controls
+          disable-zoom disable-pan interaction-prompt="none" touch-action="pan-y" shadow-intensity="1" exposure="1.35" environment-image="neutral" loading="eager">
+          <img slot="poster" src="media/switch2-pro-front.png" alt="" width="800" height="520" />
+        </model-viewer>
+        <span class="drag reveal"><i class="ph ph-hand-grabbing" aria-hidden="true"></i><span data-i18n="hero.drag">Drag to turn it</span></span>
       </div>
     </section>
 
@@ -576,7 +676,7 @@
     <div class="wrap">
       <div class="foot">
         <a class="brand" href="#top"><img src="media/app-icon.png" alt="" width="28" height="28" />RelayPad</a>
-        <nav class="foot-links" aria-label="Footer">
+        <nav class="foot-links" aria-label="Footer" data-i18n-aria="aria.footer">
           <a href="https://github.com/ElegantCatterpillar/RelayPad/releases" data-i18n="foot.releases">All releases</a>
           <a href="https://github.com/ElegantCatterpillar/RelayPad/blob/main/CHANGELOG.md" data-i18n="foot.changelog">What's new</a>
           <a href="https://github.com/ElegantCatterpillar/RelayPad/blob/main/ROADMAP.md" data-i18n="foot.roadmap">Roadmap</a>
@@ -592,135 +692,18 @@
   <script>
     (function () {
       var REPO = "ElegantCatterpillar/RelayPad";
-      var es = {
-        "skip": "Saltar al contenido",
-        "nav.features": "Funciones",
-        "nav.how": "Cómo funciona",
-        "nav.controllers": "Controles",
-        "nav.faq": "Preguntas",
-        "nav.download": "Descargar",
-        "hero.eyebrow": "Gratis para Windows 10 y 11",
-        "hero.title": "Tu control de Switch,<br />listo para cualquier juego de PC.",
-        "hero.lead": "RelayPad conecta tu Control Pro de Switch 2, tus Joy-Con 2 o tu Control Pro de Switch y se lo presenta a tus juegos como un control de Xbox o PlayStation. Sin configurar cada juego. Con movimiento, vibración HD y batería.",
-        "cta.download": "Descargar para Windows",
-        "cta.note": "Gratis · Sin cuenta · Se actualiza solo",
-        "problem.title": "Los juegos de PC esperan un control de Xbox. El tuyo habla Switch.",
-        "problem.lead": "Conecta un control de Switch a Windows y la mayoría de los juegos lo ignora, o pone cada botón en el lugar equivocado. RelayPad se pone en medio: tú usas el control que te gusta y tus juegos ven uno que ya entienden.",
-        "problem.before": "Sin RelayPad",
-        "problem.beforeDetail": "Sin respuesta, botones cambiados, sin vibración, sin giroscopio.",
-        "problem.after": "Con RelayPad",
-        "problem.afterDetail": "Un control estándar de Xbox 360 o DualShock 4 que todos los juegos reconocen.",
-        "features.title": "Todo lo que tu control sabe hacer, en PC.",
-        "features.lead": "No solo botones y sticks. RelayPad trae las funciones que hacen grandes a los controles de Switch.",
-        "f1.title": "Todos los botones, todas las funciones",
-        "f1.text": "Sticks, gatillos, los botones GL, GR y C de Switch 2, movimiento, vibración HD, luces de jugador y batería.",
-        "f2.title": "Inalámbrico o con cable, a media partida",
-        "f2.text": "Conecta el cable mientras juegas y sigue. El juego nunca pierde tu control.",
-        "f3.title": "Juega en compañía",
-        "f3.text": "Hasta ocho controles a la vez, cada uno con su jugador, recordado entre sesiones.",
-        "f4.title": "Hazlo tuyo",
-        "f4.text": "Perfiles con nombre con reasignación de botones, turbo, macros, zonas muertas y curvas de los sticks, apuntado con giroscopio y una vibración que pruebas antes de guardar.",
-        "f5.title": "NFC y amiibo",
-        "f5.text": "En el Control Pro de Switch, lee amiibo y etiquetas con el nombre del personaje, y escribe en etiquetas en blanco.",
-        "f6.title": "Siempre al día",
-        "f6.text": "Las versiones nuevas se instalan solas cuando ningún control está en uso. La batería y el estado viven en tu bandeja.",
-        "tagline": "Ya tienes el mejor control. Ahora todos tus juegos de PC también lo saben.",
-        "how.title": "A jugar en tres pasos.",
-        "how.lead": "Sin cuentas, sin líneas de comandos, sin editar archivos.",
-        "s1.title": "Descarga e instala",
-        "s1.text": "Baja el instalador de la versión más reciente y ejecútalo. RelayPad vive en tu bandeja.",
-        "s2.title": "Agrega el controlador",
-        "s2.text": "RelayPad instala ViGEmBus, el controlador detrás del control virtual, con un clic desde Ajustes.",
-        "s3.title": "Conecta y juega",
-        "s3.text": "Conecta el cable o empareja por Bluetooth. La app te muestra los pasos exactos para tu modelo.",
-        "how.needs": "Necesitas Windows 10 u 11 (x64) y un adaptador Bluetooth o un cable USB.",
-        "pads.title": "Hecho para la familia Switch.",
-        "pads.lead": "Cada control tiene su propio soporte, probado en hardware real.",
-        "badge.ready": "Listo",
-        "badge.testing": "En pruebas",
-        "badge.next": "Lo siguiente",
-        "badge.later": "En la hoja de ruta",
-        "feat.buttons": "Todos los botones, incl. GL, GR, C",
-        "feat.motion": "Movimiento",
-        "feat.hd": "Vibración HD",
-        "feat.rumble": "Vibración",
-        "feat.leds": "Luces de jugador",
-        "feat.battery": "Batería",
-        "feat.nfcRead": "Lectura de NFC y amiibo",
-        "feat.nfcWrite": "Escritura NFC (en pruebas)",
-        "feat.sideways": "En horizontal",
-        "feat.pair": "Izquierdo y derecho como un solo control",
-        "feat.remembered": "Se recuerda entre sesiones",
-        "pad.jc2": "Joy-Con 2, izquierdo o derecho",
-        "pad.jc2pair": "Par de Joy-Con 2",
-        "pad.jc1": "Joy-Con y Joy-Con de NES",
-        "pad.nso": "GameCube, SNES, N64 y Genesis",
-        "faq.title": "Preguntas antes de descargar.",
-        "q1": "¿RelayPad de verdad es gratis?",
-        "a1": "Sí. Es gratis para uso personal, sin anuncios, sin cuenta y sin periodo de prueba.",
-        "q2": "Windows me advierte sobre el instalador. ¿Es seguro?",
-        "a2": "RelayPad es nuevo y su instalador todavía no tiene firma de código, así que Windows SmartScreen puede decir \"editor desconocido\". Elige Más información y luego Ejecutar de todas formas. Las actualizaciones sí van firmadas, y la app revisa esa firma antes de instalar una.",
-        "q3": "¿Qué juegos funcionan?",
-        "a3": "Cualquier juego compatible con un control de Xbox 360 o DualShock 4, que son casi todos los juegos de PC con soporte para control, en Steam o donde sea.",
-        "q4": "¿Los juegos verán dos controles?",
-        "a4": "Puede pasar. Instala el controlador opcional HidHide desde Ajustes, Controladores, y los juegos solo verán el control de RelayPad. En los controles de Switch 2 todavía está en pruebas.",
-        "q5": "¿Necesito Bluetooth?",
-        "a5": "No siempre. El Control Pro de Switch 2 y el Control Pro de Switch funcionan con cable USB. Los Joy-Con 2 no tienen puerto USB, así que necesitan un adaptador Bluetooth.",
-        "q6": "¿Puedo usar varios controles a la vez?",
-        "a6": "Sí, hasta ocho, cada uno con su jugador. Puedes mover un control a otro jugador o intercambiar dos desde la app.",
-        "q7": "¿Envía mis datos a algún lado?",
-        "a7": "No. RelayPad puede guardar un reporte de diagnóstico en tu PC si lo permites en el primer inicio. No se sube nada.",
-        "q8": "¿Cómo lo desinstalo?",
-        "a8": "Desde Configuración, Aplicaciones, Aplicaciones instaladas en Windows. Los controladores que agregaste desde RelayPad se quitan en su propia página de Controladores.",
-        "final.title": "Tu control está listo. ¿Y tu PC?",
-        "final.lead": "Gratis para Windows 10 y 11. Sin cuenta, sin anuncios, sin periodo de prueba.",
-        "foot.releases": "Todas las versiones",
-        "foot.changelog": "Novedades",
-        "foot.roadmap": "Hoja de ruta",
-        "foot.help": "Ayuda e ideas",
-        "foot.license": "Licencia",
-        "foot.privacy": "Privacidad",
-        "foot.legal": "RelayPad es un proyecto independiente, sin afiliación, respaldo ni patrocinio de Nintendo, Microsoft o Sony. Nintendo Switch, Joy-Con y amiibo son marcas de Nintendo. Xbox es una marca de Microsoft. DualShock y PlayStation son marcas de Sony Interactive Entertainment."
-      };
-      var meta = {
-        en: { title: document.title, toggle: "ES", toggleLabel: "Cambiar a español", version: "Version " },
-        es: { title: "RelayPad · Tu control de Switch en PC", toggle: "EN", toggleLabel: "Switch to English", version: "Versión " }
-      };
+      var es = document.documentElement.lang.indexOf("es") === 0;
+      function store(v) { try { localStorage.setItem("relaypad-lang", v); } catch (e) { /* private mode */ } }
+      function read() { try { return localStorage.getItem("relaypad-lang"); } catch (e) { return null; } }
 
-      // English lives in the markup; remember it once so switching back needs no second copy.
-      var en = {};
-      document.querySelectorAll("[data-i18n]").forEach(function (el) { en[el.dataset.i18n] = el.textContent; });
-      document.querySelectorAll("[data-i18n-html]").forEach(function (el) { en[el.dataset.i18nHtml] = el.innerHTML; });
-
-      var lang = "en";
-      var latest = null;
-
-      function store(key, value) { try { localStorage.setItem(key, value); } catch (e) { /* private mode */ } }
-      function read(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
-
-      function apply(next) {
-        lang = next;
-        var dict = next === "es" ? es : en;
-        document.documentElement.lang = next === "es" ? "es-MX" : "en";
-        document.querySelectorAll("[data-i18n]").forEach(function (el) {
-          var t = dict[el.dataset.i18n]; if (t) el.textContent = t;
-        });
-        document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
-          var t = dict[el.dataset.i18nHtml]; if (t) el.innerHTML = t;
-        });
-        document.title = meta[next].title;
-        var toggle = document.querySelector("[data-lang-toggle]");
-        toggle.textContent = meta[next].toggle;
-        toggle.setAttribute("aria-label", meta[next].toggleLabel);
-        showVersion();
-        splitTagline();
-      }
-
-      document.querySelector("[data-lang-toggle]").addEventListener("click", function () {
-        var next = lang === "en" ? "es" : "en";
-        store("relaypad-lang", next);
-        apply(next);
+      // A Spanish browser landing on the English page goes to /es/ once, unless the visitor already picked a language.
+      document.querySelectorAll("[data-lang-link]").forEach(function (a) {
+        a.addEventListener("click", function () { store(a.dataset.langLink); });
       });
+      if (!es && !read() && (navigator.language || "").toLowerCase().indexOf("es") === 0) {
+        location.replace("es/" + location.hash);
+        return;
+      }
 
       // Mobile menu
       var burger = document.querySelector(".burger");
@@ -742,20 +725,17 @@
       var words = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { e.target.classList.toggle("on", e.isIntersecting || e.boundingClientRect.top < 0); });
       }, { rootMargin: "0px 0px -45% 0px" });
-      function splitTagline() {
-        var p = document.querySelector("[data-tagline]");
-        words.disconnect();
-        var text = p.textContent;
-        p.textContent = "";
-        text.split(/\s+/).forEach(function (w, i, all) {
-          var span = document.createElement("span");
-          span.className = "w";
-          span.textContent = w;
-          p.appendChild(span);
-          if (i < all.length - 1) p.appendChild(document.createTextNode(" "));
-          words.observe(span);
-        });
-      }
+      var tagline = document.querySelector("[data-tagline]");
+      var text = tagline.textContent.trim();
+      tagline.textContent = "";
+      text.split(/\s+/).forEach(function (w, i, all) {
+        var span = document.createElement("span");
+        span.className = "w";
+        span.textContent = w;
+        tagline.appendChild(span);
+        if (i < all.length - 1) tagline.appendChild(document.createTextNode(" "));
+        words.observe(span);
+      });
 
       // Current nav section
       var links = document.querySelectorAll(".nav-links a");
@@ -767,24 +747,38 @@
       }, { rootMargin: "-45% 0px -50% 0px" });
       ["features", "how", "controllers", "faq"].forEach(function (id) { current.observe(document.getElementById(id)); });
 
-      // Point the download buttons straight at the installer of the latest release.
-      function showVersion() {
-        if (!latest) return;
-        document.querySelectorAll("[data-version]").forEach(function (el) { el.textContent = meta[lang].version + latest + " · "; });
+      function api(path) {
+        return fetch("https://api.github.com/repos/" + REPO + path).then(function (r) { return r.ok ? r.json() : null; });
       }
-      fetch("https://api.github.com/repos/" + REPO + "/releases/latest")
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (rel) {
-          if (!rel) return;
-          latest = String(rel.tag_name || "").replace(/^v/, "") || null;
-          var exe = (rel.assets || []).filter(function (a) { return /setup\.exe$/i.test(a.name); })[0];
-          if (exe) document.querySelectorAll("[data-download]").forEach(function (a) { a.href = exe.browser_download_url; });
-          showVersion();
-        })
-        .catch(function () { /* buttons keep pointing at the releases page */ });
 
-      var saved = read("relaypad-lang");
-      apply(saved === "es" || saved === "en" ? saved : (navigator.language || "").toLowerCase().indexOf("es") === 0 ? "es" : "en");
+      // Point the download buttons straight at the installer of the latest release.
+      api("/releases/latest").then(function (rel) {
+        if (!rel) return;
+        var version = String(rel.tag_name || "").replace(/^v/, "");
+        var exe = (rel.assets || []).filter(function (a) { return /setup\.exe$/i.test(a.name); })[0];
+        if (exe) document.querySelectorAll("[data-download]").forEach(function (a) { a.href = exe.browser_download_url; });
+        if (version) document.querySelectorAll("[data-version]").forEach(function (el) { el.textContent = (es ? "Versión " : "Version ") + version + " · "; });
+      }).catch(function () { /* the buttons keep pointing at the releases page */ });
+
+      // Real counts from GitHub, shown only once they are large enough to reassure a new visitor.
+      var MIN_DOWNLOADS = 500, MIN_STARS = 50;
+      function showStat(name, value, min) {
+        if (!(value >= min)) return false;
+        var el = document.querySelector('[data-stat="' + name + '"]');
+        el.querySelector("strong").textContent = value.toLocaleString(es ? "es-MX" : "en-US");
+        el.hidden = false;
+        return true;
+      }
+      Promise.all([api(""), api("/releases?per_page=100")]).then(function (res) {
+        var downloads = 0;
+        (res[1] || []).forEach(function (r) {
+          (r.assets || []).forEach(function (a) { if (/setup\.exe$/i.test(a.name)) downloads += a.download_count; });
+        });
+        var d = showStat("downloads", downloads, MIN_DOWNLOADS);
+        var st = showStat("stars", res[0] ? res[0].stargazers_count : 0, MIN_STARS);
+        document.querySelector("[data-stat-sep]").hidden = !(d && st);
+        document.querySelector("[data-stats]").hidden = !(d || st);
+      }).catch(function () { /* the stats line stays hidden */ });
     })();
   </script>
 </body>
