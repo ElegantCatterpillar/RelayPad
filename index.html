@@ -264,6 +264,12 @@
     .hero-art { margin-top: var(--s-700); width: 100%; max-width: 640px; border-radius: 24px; border: 1px solid var(--line); }
     .shot { margin: 0 0 var(--s-700); }
     .shot img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); }
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-400) var(--s-300); }
+    .gallery figure { margin: 0; }
+    .gallery img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); }
+    .gallery h3 { margin-top: var(--s-200); font-size: 20px; line-height: 28px; }
+    .gallery p { margin-top: var(--s-50); color: var(--muted); text-wrap: pretty; }
+    @media (max-width: 760px) { .gallery { grid-template-columns: 1fr; } }
     .stats { margin-top: var(--s-200); font-size: 14px; line-height: 20px; color: var(--muted); }
     .stats strong { color: var(--text); font-weight: 600; }
     @media (max-width: 640px) {
@@ -496,6 +502,45 @@
             <h3 data-i18n="f6.title">Always up to date</h3>
             <p data-i18n="f6.text">New versions install themselves when no controller is in use. Battery and status live in your tray.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="inside">
+      <div class="wrap">
+        <div class="head reveal">
+          <h2 class="h2" data-i18n="inside.title">Every setting, one window away.</h2>
+          <p class="lead" data-i18n="inside.lead">No config files and no command line. Change something, try it, save it.</p>
+        </div>
+        <div class="gallery">
+          <figure class="reveal">
+            <img src="media/app-buttons.png" alt="Button remapping screen with each Switch button linked to its Xbox button" data-i18n-alt="alt.buttons" width="1026" height="684" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="inside.buttons.title">Remap any button</h3>
+              <p data-i18n="inside.buttons.text">See every button on the controller and pick what it sends to the game.</p>
+            </figcaption>
+          </figure>
+          <figure class="reveal">
+            <img src="media/app-curves.png" alt="Stick response curve screen with Linear, Precise and Aggressive presets" data-i18n-alt="alt.curves" width="1026" height="684" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="inside.curves.title">Sticks that feel right</h3>
+              <p data-i18n="inside.curves.text">Calibrate, set deadzones and choose a response curve while you watch the stick move.</p>
+            </figcaption>
+          </figure>
+          <figure class="reveal">
+            <img src="media/app-output.png" alt="Output screen to choose an Xbox 360 or DualShock 4 virtual controller" data-i18n-alt="alt.output" width="1026" height="684" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="inside.output.title">Xbox or PlayStation</h3>
+              <p data-i18n="inside.output.text">Games see an Xbox 360 controller, or a DualShock 4 for the ones that expect it.</p>
+            </figcaption>
+          </figure>
+          <figure class="reveal">
+            <img src="media/app-nfc.png" alt="NFC screen to read amiibo and write blank tags" data-i18n-alt="alt.nfc" width="1026" height="684" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="inside.nfc.title">Read and write amiibo</h3>
+              <p data-i18n="inside.nfc.text">Tap an amiibo on the Switch Pro Controller to read it, or write a blank tag.</p>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>

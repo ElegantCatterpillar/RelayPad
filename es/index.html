@@ -264,6 +264,12 @@
     .hero-art { margin-top: var(--s-700); width: 100%; max-width: 640px; border-radius: 24px; border: 1px solid var(--line); }
     .shot { margin: 0 0 var(--s-700); }
     .shot img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); }
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-400) var(--s-300); }
+    .gallery figure { margin: 0; }
+    .gallery img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); }
+    .gallery h3 { margin-top: var(--s-200); font-size: 20px; line-height: 28px; }
+    .gallery p { margin-top: var(--s-50); color: var(--muted); text-wrap: pretty; }
+    @media (max-width: 760px) { .gallery { grid-template-columns: 1fr; } }
     .stats { margin-top: var(--s-200); font-size: 14px; line-height: 20px; color: var(--muted); }
     .stats strong { color: var(--text); font-weight: 600; }
     @media (max-width: 640px) {
@@ -496,6 +502,45 @@
             <h3 data-i18n="f6.title">Siempre al día</h3>
             <p data-i18n="f6.text">Las versiones nuevas se instalan solas cuando ningún control está en uso. La batería y el estado viven en tu bandeja.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="inside">
+      <div class="wrap">
+        <div class="head reveal">
+          <h2 class="h2" data-i18n="inside.title">Todos los ajustes, a una ventana de distancia.</h2>
+          <p class="lead" data-i18n="inside.lead">Sin archivos de configuración ni línea de comandos. Cambia algo, pruébalo y guárdalo.</p>
+        </div>
+        <div class="gallery">
+          <figure class="reveal">
+            <img src="../media/app-buttons.png" alt="Pantalla de reasignación de botones con cada botón de Switch unido a su botón de Xbox" data-i18n-alt="alt.buttons" width="1026" height="684" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="inside.buttons.title">Cambia cualquier botón</h3>
+              <p data-i18n="inside.buttons.text">Ve cada botón del control y elige qué le manda al juego.</p>
+            </figcaption>
+          </figure>
+          <figure class="reveal">
+            <img src="../media/app-curves.png" alt="Pantalla de curva de respuesta del stick con los modos Lineal, Preciso y Agresivo" data-i18n-alt="alt.curves" width="1026" height="684" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="inside.curves.title">Sticks que se sienten bien</h3>
+              <p data-i18n="inside.curves.text">Calibra, ajusta zonas muertas y elige una curva de respuesta mientras ves moverse el stick.</p>
+            </figcaption>
+          </figure>
+          <figure class="reveal">
+            <img src="../media/app-output.png" alt="Pantalla para elegir un control virtual de Xbox 360 o DualShock 4" data-i18n-alt="alt.output" width="1026" height="684" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="inside.output.title">Xbox o PlayStation</h3>
+              <p data-i18n="inside.output.text">Los juegos ven un control de Xbox 360, o un DualShock 4 para los que lo esperan.</p>
+            </figcaption>
+          </figure>
+          <figure class="reveal">
+            <img src="../media/app-nfc.png" alt="Pantalla de NFC para leer amiibo y escribir etiquetas en blanco" data-i18n-alt="alt.nfc" width="1026" height="684" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="inside.nfc.title">Lee y escribe amiibo</h3>
+              <p data-i18n="inside.nfc.text">Acerca un amiibo al Control Pro de Switch para leerlo, o escribe una etiqueta en blanco.</p>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
