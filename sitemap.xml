@@ -12,4 +12,16 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://elegantcatterpillar.github.io/RelayPad/es/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://elegantcatterpillar.github.io/RelayPad/" />
   </url>
+  <url>
+    <loc>https://elegantcatterpillar.github.io/RelayPad/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elegantcatterpillar.github.io/RelayPad/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://elegantcatterpillar.github.io/RelayPad/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elegantcatterpillar.github.io/RelayPad/guide/" />
+  </url>
+  <url>
+    <loc>https://elegantcatterpillar.github.io/RelayPad/es/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elegantcatterpillar.github.io/RelayPad/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://elegantcatterpillar.github.io/RelayPad/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elegantcatterpillar.github.io/RelayPad/guide/" />
+  </url>
 </urlset>
