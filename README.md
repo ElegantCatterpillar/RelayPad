@@ -16,10 +16,6 @@
   <a href="https://elegantcatterpillar.github.io/RelayPad/">Website</a> · <a href="https://elegantcatterpillar.github.io/RelayPad/guide/">User guide</a> · <a href="#support-relaypad">Support</a> · <b>English</b> · <a href="es/README.md">Español (México)</a>
 </p>
 
-<p align="center">
-  <img src="media/switch2-pro-front.png" alt="Nintendo Switch 2 Pro Controller" width="480" />
-</p>
-
 You already own a great controller. RelayPad lets you use it on PC. It connects your Switch 2
 Pro Controller, Joy-Con 2 or Switch Pro Controller and shows it to your games as an Xbox 360
 or DualShock 4 controller, so every game that supports a gamepad just works: no per-game

@@ -28,4 +28,8 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://elegantcatterpillar.github.io/RelayPad/es/guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://elegantcatterpillar.github.io/RelayPad/guide/" />
   </url>
+  <url>
+    <loc>https://elegantcatterpillar.github.io/RelayPad/privacy/</loc>
+    <lastmod>2026-11-20</lastmod>
+  </url>
 </urlset>
