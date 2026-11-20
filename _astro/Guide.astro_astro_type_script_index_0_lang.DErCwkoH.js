@@ -1,1 +1,0 @@
-import"./site.v1jTbHcU.js";var e=document.querySelectorAll(`[data-toc]`),t=new IntersectionObserver(t=>{t.forEach(t=>{t.isIntersecting&&e.forEach(e=>e.setAttribute(`aria-current`,String(e.dataset.toc===t.target.id)))})},{rootMargin:`-20% 0px -70% 0px`});document.querySelectorAll(`section.doc`).forEach(e=>t.observe(e));

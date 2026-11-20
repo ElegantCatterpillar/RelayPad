@@ -1,7 +1,23 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>404 · RelayPad</title><script>
       (function () {
         var theme = null;
-        try { theme = localStorage.getItem("relaypad-theme"); } catch (e) { /* storage blocked */ }
+        var chosen = null;
+        try {
+          theme = localStorage.getItem("relaypad-theme");
+          chosen = localStorage.getItem("relaypad-lang");
+        } catch (e) { /* storage blocked */ }
+        // A Spanish browser on an English page goes to its Spanish copy, unless the
+        // visitor already picked a language with the switcher.
+        var esHref = document.documentElement.dataset.esHref;
+        if (esHref && !chosen && (navigator.language || "").toLowerCase().indexOf("es") === 0) {
+          location.replace(esHref + location.search + location.hash);
+          return;
+        }
+        document.addEventListener("click", function (e) {
+          var link = e.target.closest && e.target.closest("[data-lang-link]");
+          if (!link) return;
+          try { localStorage.setItem("relaypad-lang", link.dataset.langLink); } catch (err) { /* storage blocked */ }
+        });
         if (theme !== "light" && theme !== "dark") {
           theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
         }
