@@ -28,7 +28,7 @@ sin configurar cada juego, sin herramientas extra.
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="../media/screens/es/dark/status.png" />
-    <img src="../media/screens/es/light/status.png" alt="Ventana de RelayPad con un Control Pro de Switch en el jugador 2, lecturas de sticks en vivo y batería" width="720" />
+    <img src="../media/screens/es/light/status.png" alt="Ventana de RelayPad con un Control Pro de Switch 2 en el jugador 1 por USB, lecturas de sticks en vivo y batería" width="720" />
   </picture>
 </p>
 

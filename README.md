@@ -28,7 +28,7 @@ setup, no extra tools.
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="media/screens/en/dark/status.png" />
-    <img src="media/screens/en/light/status.png" alt="RelayPad window showing a Switch Pro Controller on player 2, live stick readings and battery" width="720" />
+    <img src="media/screens/en/light/status.png" alt="RelayPad window showing a Switch 2 Pro Controller on player 1 over USB, with live stick readings and battery" width="720" />
   </picture>
 </p>
 
