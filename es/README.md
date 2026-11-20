@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="../media/lockup-dark-lg.png" />
-    <img src="../media/lockup-light-lg.png" alt="RelayPad" width="320" />
+    <source media="(prefers-color-scheme: dark)" srcset="../media/lockup-dark-lg.svg" />
+    <img src="../media/lockup-light-lg.svg" alt="RelayPad" width="320" />
   </picture>
 </p>
 
