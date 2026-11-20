@@ -1,0 +1,32 @@
+# RelayPad
+
+> RelayPad is a free Windows 10 and 11 app that lets you play PC games with Nintendo Switch controllers: the Switch 2 Pro Controller, the Joy-Con 2 and the Switch Pro Controller. It shows each controller to games as a standard Xbox 360 or DualShock 4 controller (through ViGEmBus), so every game that supports a gamepad works with no per-game setup.
+
+Answers to common questions:
+
+- Use a Switch 2 Pro Controller on PC: install RelayPad, then connect the controller over USB or Bluetooth. Games see an Xbox 360 or DualShock 4 controller.
+- Use Joy-Con 2 on PC: RelayPad connects each Joy-Con 2 over Bluetooth (they have no USB port). A single Joy-Con 2 can be held sideways as its own controller, or the left and right halves can be joined into one controller.
+- Use a Switch Pro Controller (Switch 1) on PC: RelayPad supports it over USB and Bluetooth.
+- Supported features: all buttons including the Switch 2 GL, GR and C buttons, sticks, triggers, motion (gyro aim as right stick or mouse), HD rumble, player lights, battery level, NFC and amiibo reading, writing blank tags and backing up your own amiibo.
+- Up to four controllers at once, each on its own player, remembered between sessions.
+- Profiles with button remapping, turbo, macros, stick calibration, deadzones and response curves.
+- Switching between Bluetooth and USB mid game keeps the same virtual controller, so the game does not lose it.
+- Requirements: Windows 10 or 11 and the ViGEmBus driver, which RelayPad installs from Settings, Drivers. HidHide is optional: it hides the original controller from games so they do not see it twice.
+- Price: free, no account. New versions install themselves when no controller is in use.
+- Safety: the installer is not code-signed yet, so Windows SmartScreen may warn about an unknown publisher. Every release links its VirusTotal scan and SHA-256 hash.
+- RelayPad is an independent project, not affiliated with Nintendo, Microsoft or Sony.
+
+## Main pages
+
+- [Website (English)](https://elegantcatterpillar.github.io/RelayPad/): what RelayPad does, supported controllers, screenshots and FAQ.
+- [Sitio web (Español)](https://elegantcatterpillar.github.io/RelayPad/es/): the same page in Spanish.
+- [User guide](https://elegantcatterpillar.github.io/RelayPad/guide/): installing, connecting each controller, profiles, gyro, NFC and troubleshooting.
+- [Guía de uso (Español)](https://elegantcatterpillar.github.io/RelayPad/es/guide/): the guide in Spanish.
+- [Download the latest version](https://github.com/ElegantCatterpillar/RelayPad/releases/latest): Windows installer, release notes, VirusTotal scan and SHA-256.
+
+## More
+
+- [README](https://github.com/ElegantCatterpillar/RelayPad/blob/main/README.md): overview on GitHub.
+- [Changelog](https://elegantcatterpillar.github.io/RelayPad/CHANGELOG.md): what changed in each version.
+- [Roadmap](https://elegantcatterpillar.github.io/RelayPad/ROADMAP.md): what is planned next.
+- [Amiibo backup](https://elegantcatterpillar.github.io/RelayPad/amiibo-backup.md): how backing up your own amiibo onto blank tags works.
